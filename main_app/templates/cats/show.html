@@ -1,4 +1,17 @@
-<h2>Name: {{ cat.name }}</h2>
-<h2>Breed: {{ cat.breed }}</h2>
-<h2>Description: {{ cat.description }}</h2>
-<h2>Age: {{ cat.age }}</h2>
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Name: {{ cat.name }}</h2>
+    <h2>Breed: {{ cat.breed }}</h2>
+    <h2>Description: {{ cat.description }}</h2>
+    <h2>Age: {{ cat.age }}</h2>
+    {% for cattoy in cat.cattoys.all %}
+    <div>{{cattoy.name}}</div>
+{% empty %}
+    <div>Cat Has No Toys :(</div>
+{% endfor %}
+    <div class="card-content">
+        <!-- Add links for update and delete here... -->
+        <a href="{% url 'cats_update' cat.id %}">Update Details</a> | 
+        <a href="{% url 'cats_delete' cat.id %}">Delete This Cat</a>
+    </div>
+{% endblock %}
